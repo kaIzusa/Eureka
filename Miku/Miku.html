@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/form.css">
+    <link rel="stylesheet" href="./css/logn.css">
+    <link rel="stylesheet" href="./css/sign.css">
+    <link rel="stylesheet" href="./css/find.css">
+    <link rel="stylesheet" href="./css/act.css">
+
+</head>
+<body>
+    <div class="logn" id="logn">
+        <div class="left"></div>
+        <div class="right">
+            <h3>登录</h3>
+            <form action="">
+                <input class="cl" type="text" placeholder="账号">
+                <input class="cl" type="password" placeholder="密码">
+                <input class="sub" type="submit" value="登录">
+            </form>
+            <div class="fn">
+                <a href="#" id="ls">注册账号</a>
+                <a href="#" id="lf">邮箱登录</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="sign" id="sign">
+        <div class="left">
+            <h3>注册</h3>
+            <form action="">
+                <input type="text" class="cl" placeholder="邮箱">
+                <input class="cl" type="text" placeholder="账号">
+                <input class="cl" type="password" placeholder="密码">
+                <input class="sub" type="submit" value="登录">
+            </form>
+            <div class="fn">
+                <a href="#" id="sf">邮箱登录</a>
+                <a href="#" id="sl">密码登录</a>
+            </div>
+        </div>
+        <div class="right"></div>
+    </div>
+
+    <div class="find" id="find">
+        <div class="left"></div>
+        <div class="right">
+            <h3>邮箱登录</h3>
+            <form action="">
+                <input class="cl" type="text" placeholder="邮箱">
+                <input class="cl" type="password" placeholder="验证码">
+                <input class="sub" type="submit" value="登录">
+            </form>
+            <div class="fn">
+                <a href="#" id="fl">密码登录</a>
+                <a href="#" id="fs">注册账号</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let logn = document.querySelector(`#logn`)
+        let sign = document.querySelector(`#sign`)
+        let find = document.querySelector(`#find`)
+        // ----------------------------------------------------------------------
+        // logn->any
+        let ls = document.querySelector(`#ls`)
+        let lf = document.querySelector(`#lf`)
+        // sign->any
+        let sf = document.querySelector(`#sf`)
+        let sl = document.querySelector(`#sl`)
+        // find-any
+        let fl = document.querySelector(`#fl`)
+        let fs = document.querySelector(`#fs`)
+        let anti = `anti 3.5s forwards`
+        let ti = `ti 3.5s forwards`
+
+        //------logn->any-------------------------------------------
+        ls.onclick = function(){
+            logn.style.animation = anti
+            sign.style.animation = ti
+        }
+        lf.onclick = function(){
+            logn.style.animation = anti
+            find.style.animation = ti
+        }
+        //------sign->any-------------------------------------------
+        sf.onclick = function(){
+            sign.style.animation = anti
+            find.style.animation = ti
+        }
+        sl.onclick = function(){
+            sign.style.animation = anti
+            logn.style.animation = ti
+        }
+        //------find->any-------------------------------------------
+        fl.onclick = function(){
+            find.style.animation = anti
+            logn.style.animation = ti
+        }
+        fs.onclick = function(){
+            find.style.animation = anti
+            sign.style.animation = ti
+        }
+
+    </script>
+</body>
+</html>
