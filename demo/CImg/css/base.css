@@ -9,7 +9,62 @@
 h1 {
   text-align: center;
 }
+
 .CImg {
-  width: 600px;
-  height: 450px;
+  margin: 50px auto 0px;
+  width: 400px;
+  height: 300px;
+  /* background-image: url('../img/img3.jpg'); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  box-shadow: 0px 2px 2px black;
+  border-radius: 8px 8px 0px 0px;
+
+  /* transition: background-image 0.1s ease; */
+}
+
+.other {
+  margin: 0px auto;
+  width: 400px;
+  height: 55px;
+  background-image: linear-gradient(0deg,#e9e6e6 60%,#ddd);
+  position: relative;
+  box-shadow: 0px 2px 2px black;
+  border-radius: 0px 0px 8px 8px;
+}
+ul {
+  display: flex;
+  width: 300px;
+  height: 20px;
+  justify-content: space-around;
+}
+li {
+  list-style: none;
+  text-align: center;
+  line-height: 20px;
+}
+.text {
+  position: absolute;
+  margin: 0px 0px 0px 15px;
+  color: #2a2a2aa4;
+}
+.anniu {
+  width: 80px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 300px;
+  text-align: center;
+}
+.anniu .left,.anniu .right {
+  width: 30px;
+  background-color: #dddddd5a;
+  border-radius: 5px;
+  font-size: 20px; 
+}
+
+.is_active {
+  color: red;
 }
