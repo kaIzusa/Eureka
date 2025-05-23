@@ -1,0 +1,15 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+::selection {
+  color: aqua;
+}
+h1 {
+  text-align: center;
+}
+.CImg {
+  width: 600px;
+  height: 450px;
+}

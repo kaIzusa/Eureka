@@ -1,0 +1,35 @@
+/* 一些常用的css样式 */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+::selection {
+  /*选中字体时的变化*/
+  color: aqua;
+}
+div background{
+  width: 100%;
+  height: 100%;
+  background-image: url('./css/img/img14.jpg');
+  background-size: contain; /* 或 cover ，背景图片大小*/
+  background-repeat: no-repeat;/*定义背景图像的重复方式*/
+  background-position: center;/*设置初始位置*/
+}
+div flex {
+  /*弹性容器*/
+  display: flex;
+  flex-direction: row; /*决定主轴位置*/
+  flex-wrap: nowrap;/*如何换行*/
+  justify-content: flex-start;/*主轴排列方式*/
+  align-items: flex-start;/*交叉轴排列方式*/
+  align-content: flex-start;/*多条交叉轴之间的排列方式*/
+}
+div flex div {
+  /*弹性盒子*/
+  order: 1;/*排列顺序，数字越小越在前*/
+  flex-grow: 1;/*变大*/
+  flex-shrink: 1;/*缩小*/
+  flex-basis: 1px;/*在分配多余空间之前，占据的主轴空间*/
+  align-self: flex-end;/*单个盒子在交叉轴的排列方式*/
+}
