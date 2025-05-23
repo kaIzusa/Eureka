@@ -5,8 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>今天吃什么</title>
 </head>
+<link rel="stylesheet" href="/demo/eatFood/eat.css">
+
 <body>
-  <h1>wdad</h1>
+  <h1>今天吃什么</h1>
+  <div class="eat"></div>
+  <div class="butDiv">
+    <button class="but kai">开始</button>
+    <!-- <button class="but guan">停止</button> -->
+  </div>
+
+  <script>
+    const eatArr = ['土豆片加豆腐加饭','麻辣烫','土豆加泡面','拌面','烧烤','大快朵颐']
+    // 1.获取元素
+    const eat = document.querySelector('.eat')
+    const kai = document.querySelector('.kai')
+    // 2.写函数
+    function getRandom(N,M){
+      return Math.floor(Math.random()*(M-N+1))+N
+    }//这个是随机数函数，返回一个N-M之间包含N与M的数字
+
+     let foodInterval = null
+     let isRunning = false
+    
+
+    kai.addEventListener('click',function(){
+      if(!isRunning){
+        foodInterval = setInterval(function(){
+          const random = getRandom(0,eatArr.length-1)
+          eat.textContent = `${eatArr[random]}`
+        },50)
+        kai.textContent = `停止`
+        isRunning = true
+      }else{
+        kai.textContent = `开始`
+        clearInterval(foodInterval)
+        isRunning = false
+      }
+    })
+  </script>
   
 </body>
 </html>
