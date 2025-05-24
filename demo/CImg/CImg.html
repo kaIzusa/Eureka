@@ -36,19 +36,13 @@
   </div>
 
   <script>
-      /*点击按钮后：
-    1.CImg中图片更换
-    2.other中渐变改色
-    3.text中内容更改
-    4.li添加类.is_active且去掉上一个的is_active
-    获取支点**/
-    let liAll = document.querySelectorAll('li')
-    let CImg = document.querySelector('.CImg')
-    let other = document.querySelector('.other')
-    let text = document.querySelector('.text')
-    let left_btn = document.querySelector('.left')
-    let right_btn = document.querySelector('.right')
-    let arr = [
+    const liAll = document.querySelectorAll('li')
+    const CImg = document.querySelector('.CImg')
+    const other = document.querySelector('.other')
+    const text = document.querySelector('.text')
+    const left_btn = document.querySelector('.left')
+    const right_btn = document.querySelector('.right')
+    const arr = [
     {scr:'./img/img17.jpg',color:'0deg,#e9e6e6 10%,#b8926d',text:'汉皇重色思倾国'},
     {scr:'./img/img4.jpg',color:'0deg,#e9e6e6 10%,#161c28',text:'御宇多年求不得'},
     {scr:'./img/img6.jpg',color:'0deg,#e9e6e6 10%,#fff',text:'杨家有女初长成'},
@@ -63,74 +57,98 @@
     {scr:'./img/img19.png',color:'0deg,#e9e6e6 10%,#fad8d5',text:'始是新承恩泽时'},
     {scr:'./img/img20.jpg',color:'0deg,#e9e6e6 10%,#282832',text:'云鬓花颜金步摇'}
     ]
-        //每次刷新页面都会生成不同的起始i值，生成随机数
+    //每次刷新页面都会生成不同的起始i值，生成随机数
     function getRandom(N,M){
       return Math.floor(Math.random()*(M-N+1))+N
     }
     // 获取随机值i
     let i = getRandom(0,arr.length-1)
-    // 初始化页面：
-    let fx = function(){
-      CImg.style.backgroundImage = `url(${arr[i]['scr']})`
-      text.textContent = `${arr[i]['text']}`
-      other.style.backgroundImage = `linear-gradient(${arr[i]['color']})`
-      liAll[i].classList.add('is_active')
+    let interval;//获取定时器序号
+    let isAutoPlay = true;//
+    
+    // 刷新页面页面：
+    function updateContent(index){
+      // 移除所有圆点的is_active类
+      liAll.forEach(li => li.classList.remove('is_active'))
+      //更新内容
+      CImg.style.backgroundImage = `url(${arr[index].scr})`
+      text.textContent = `${arr[index].text}`
+      other.style.backgroundImage = `linear-gradient(${arr[index].color})`
+      liAll[index].classList.add('is_active')
+      //更新索引
+      i = index
     }
-    fx()
-    //渲染小圆点li
-    for(let x = 0 ; x<liAll.length ; x++){
-      liAll[x].classList.add('iconfont')
-      liAll[x].classList.add('icon-aixin')
-      // 通过点击圆点进行切换
-      liAll[x].addEventListener('click',function(){
-        fx()
+    //初始化小圆点
+    function initDots(){
+      //index来自于forEach方法返回当前liAll数组中的第index个对象
+      liAll.forEach((li,index) => {
+        //为所有li添加图标
+        li.classList.add('iconfont','icon-aixin')
+        //为所有li添加鼠标移入特效
+        li.addEventListener('mouseenter',() =>{
+          li.style.cursor = 'pointer'
+        })
+        //点击圆点进行切换
+        li.addEventListener('click',() => {
+          updateContent(index);
+          resetInterval();
+        })
       })
     }
-
-
-    
-
-   // 定时器设置
-  //  const interval = setInterval(function(){
-  //   if (i === 12) {
-  //     i = 0
-  //     fx()
-  //     liAll[12].classList.remove('is_active')
-  //   }else{
-  //     ++i
-  //     fx()
-  //     liAll[i-1].classList.remove('is_active')
-  //   }
-  //  }
-  //  ,3000)
-
-
-
-   right_btn.addEventListener('click',function(){
-
-    if (i === 12) {
-      i = 0
-      fx()
-      liAll[12].classList.remove('is_active')
-    }else{
-      ++i
-      fx()
-      liAll[i-1].classList.remove('is_active')
+    // 自动轮播
+    function startInterval(){
+      interval = setInterval(() => {
+        const nextIndex = (i+1)%arr.length;
+        updateContent(nextIndex)
+      },5000)
     }
-   }) 
-
-   left_btn.addEventListener('click',function(){
-    if(i === 0){
-      i = 12
-      fx()
-      liAll[0].classList.remove('is_active')
-    }else{
-      --i
-      fx()
-      liAll[i+1].classList.remove('is_active')
+    // 重置定时器
+    function resetInterval(){
+      clearInterval(interval)
+      if(isAutoPlay){
+        startInterval()
+      }
     }
-   })
 
+
+
+
+  //初始化页面
+  function init(){
+    updateContent(i)
+    initDots()
+    startInterval()
+  //鼠标悬停
+    CImg.addEventListener('mouseenter',() =>{
+      CImg.style.cursor = 'pointer'
+      clearInterval(interval)
+      isAutoPlay = false;
+    })
+    CImg.addEventListener('mouseleave',() =>{
+      isAutoPlay = true
+      startInterval()
+    })
+  }
+
+  // 按钮事件
+  right_btn.addEventListener('click',() => {
+    const nextIndex = (i+1)%arr.length
+    updateContent(nextIndex)
+    resetInterval()
+  })
+  right_btn.addEventListener('mouseenter',() =>{
+    right_btn.style.cursor = 'pointer'
+  })
+  left_btn.addEventListener('click',() =>{
+    const prevIndex = (i-1+arr.length)%arr.length
+    updateContent(prevIndex)
+    resetInterval
+  })
+  left_btn.addEventListener('mouseenter',() =>{
+    left_btn.style.cursor = 'pointer'
+  })
+  // 启动
+  init()
   </script>
   
 </body>
